@@ -78,7 +78,7 @@ class AddItemViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBAction func additembuttonpressed(_ sender: Any)
     {
-        if ((itemtext.text?.isEmpty)! || ((pricetext.text?.isEmpty)!))
+        if ((itemtext.text?.isEmpty)! || ((pricetext.text?.isEmpty)!)) //makes sure both textfields have information
         {
             displayAlert(userMessage: "One or more text fields are empty.");
             itemtext.text = ""
@@ -86,17 +86,17 @@ class AddItemViewController: UIViewController, UITableViewDataSource, UITableVie
             return;
         }
         
-        if (Float(pricetext.text!)) == nil
+        if (Float(pricetext.text!)) == nil //makes sure that price text field has a float number
         {
             displayAlert(userMessage: "Price must be a number.");
             pricetext.text = ""
             return;
         }
-        grocerylist.append(itemtext.text!)
-        pricelist.append(Float(pricetext.text!)!)
-        itemTable.reloadData()
+        grocerylist.append(itemtext.text!)          //appends new item to existing grocerylist arrayappend
+        pricelist.append(Float(pricetext.text!)!)   //appends new price to corresponding price array
+        itemTable.reloadData()                      //refreshes table after array is appended
         priceTable.reloadData()
-        itemtext.text = ""
+        itemtext.text = ""                          //clears info in the text field
         pricetext.text = ""
         
     }
@@ -106,22 +106,22 @@ func AddItemstoMain(_ sender: Any) {
     }
     
     func AddItemToAddPeople(_ sender: Any) {
-        if (grocerylist.count < 1)
+        if (grocerylist.count < 1) //makes sure that grocerylist array is populated before moving onto next step
         {
-            displayAlert(userMessage: "Please add an item.");
+            displayAlert(userMessage: "Please add an item."); //error message
             return;
         }
         else
         {
-        self.performSegue(withIdentifier: "AddItemToAddPeople", sender: self)
+        self.performSegue(withIdentifier: "AddItemToAddPeople", sender: self) //if grocerylist is populated, moves to next view controller
         }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+        self.view.endEditing(true)   //if any part of screen is touched, resigns the keyboard
     }
     
-    func displayAlert(userMessage:String)
+    func displayAlert(userMessage:String) //function to display message
     {
         let myAlert = UIAlertController(title: "Oops!", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
         
